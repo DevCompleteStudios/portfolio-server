@@ -1,7 +1,10 @@
 package com.devstudios.portfolio.portfolio_backend.presentation.interceptors;
 
+import java.util.List;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -19,6 +22,20 @@ public class HandleErrors {
         String message = "Coment with '" + key + ": " + value + "' already exists";
 
         return ResponseEntity.status(200).body(message);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<String>> handleBadRequest( MethodArgumentNotValidException ex ){
+        List<String> errors = ex.getBindingResult()
+            .getFieldErrors().stream()
+                .map( e -> {
+                    String field = e.getField();
+                    String err = e.getDefaultMessage();
+
+                    return field + ": " + err;
+                }).toList();
+
+        return ResponseEntity.status(400).body(errors);
     }
 
 }
