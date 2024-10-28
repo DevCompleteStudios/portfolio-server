@@ -21,7 +21,7 @@ public class ComentEntity {
     @Column(unique=true)
     private String email;
 
-    private String coment;
+    private String content;
 
     @Column(unique=true)
     private String username;
@@ -41,12 +41,6 @@ public class ComentEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getComent() {
-        return coment;
-    }
-    public void setComent(String coment) {
-        this.coment = coment;
-    }
     public String getUsername() {
         return username;
     }
@@ -58,6 +52,12 @@ public class ComentEntity {
     }
     public void setStars(int stars) {
         this.stars = stars;
+    }
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }
