@@ -3,24 +3,24 @@ package com.devstudios.portfolio.portfolio_backend.application.dtos.coment;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class CreateComent {
 
-    @NotEmpty
+    @NotNull
     @Email
     private String email;
 
     @Size(min=5, max=100)
-    @NotEmpty
+    @NotNull
     private String username;
 
-    @NotEmpty
+    @NotNull
     @Size(min=10, max=250)
     private String content;
 
-    @NotEmpty
+    @NotNull
     @Min(value = 1)
     @Max(value= 5)
     private int stars;
