@@ -1,5 +1,9 @@
 package com.devstudios.portfolio.portfolio_backend.domain.entities;
 
+import java.time.LocalDate;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +30,9 @@ public class ComentEntity {
     @Column(unique=true)
     private String username;
     private int stars;
+
+    @CreationTimestamp
+    private LocalDate date;
 
 
 
@@ -58,6 +65,14 @@ public class ComentEntity {
     }
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
 }
