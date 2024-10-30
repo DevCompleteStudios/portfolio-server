@@ -3,6 +3,9 @@ package com.devstudios.portfolio.portfolio_backend.application.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.devstudios.portfolio.portfolio_backend.application.dtos.coment.CreateComent;
@@ -34,7 +37,8 @@ public class ComentService {
     }
 
     public ResponseDto<List<ComentEntity>> findAll( PaginationDto paginationDto ){
-        return new ResponseDto<>(comentRepository.findAll(), "All coments", 200);
+        Pageable pagination = PageRequest.of(paginationDto.getPage(), paginationDto.getElements(), Sort.by("id").descending());
+        return new ResponseDto<>(comentRepository.findAll(pagination), "All coments", 200);
     }
 
 }

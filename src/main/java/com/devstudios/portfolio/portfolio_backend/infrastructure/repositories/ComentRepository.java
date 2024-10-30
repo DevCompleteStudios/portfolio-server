@@ -3,6 +3,7 @@ package com.devstudios.portfolio.portfolio_backend.infrastructure.repositories;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.devstudios.portfolio.portfolio_backend.application.interfaces.repositories.IComentRepository;
@@ -24,7 +25,7 @@ public class ComentRepository implements IComentRepository {
     }
 
     @Override
-    public List<ComentEntity> findAll() {
-        return repositoryJpa.findAll();
+    public List<ComentEntity> findAll( Pageable pagination ) {
+        return repositoryJpa.findAll(pagination).getContent();
     }
 }

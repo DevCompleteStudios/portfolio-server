@@ -8,23 +8,23 @@ public class PaginationDto {
 
     @Min(value=0)
     @NotNull
-    private Long page;
+    private int page;
 
     @Min(value=1)
     @NotNull
-    private Long elements;
+    private int elements;
 
 
-    public Long getPage() {
+    public int getPage() {
         return page;
     }
-    public void setPage(Long page) {
+    public void setPage(int page) {
         this.page = page;
     }
-    public Long getElements() {
+    public int getElements() {
         return elements;
     }
-    public void setElements(Long elements) {
+    public void setElements(int elements) {
         this.elements = elements;
     }
 }
