@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devstudios.portfolio.portfolio_backend.application.dtos.coment.ComentDto;
 import com.devstudios.portfolio.portfolio_backend.application.dtos.coment.CreateComent;
 import com.devstudios.portfolio.portfolio_backend.application.dtos.pagination.PaginationDto;
 import com.devstudios.portfolio.portfolio_backend.application.dtos.response.ResponseDto;
@@ -35,7 +36,7 @@ public class ComentController {
     }
 
     @GetMapping("/find-all")
-    public ResponseEntity<ResponseDto<List<ComentEntity>>> findAll( @Valid PaginationDto paginationDto ){
+    public ResponseEntity<ResponseDto<List<ComentDto>>> findAll( @Valid PaginationDto paginationDto ){
         var res = service.findAll(paginationDto);
         return ResponseEntity.status(res.getStatus()).body(res);
     }

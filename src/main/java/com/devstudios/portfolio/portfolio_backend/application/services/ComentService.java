@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.devstudios.portfolio.portfolio_backend.application.dtos.coment.ComentDto;
 import com.devstudios.portfolio.portfolio_backend.application.dtos.coment.CreateComent;
 import com.devstudios.portfolio.portfolio_backend.application.dtos.pagination.PaginationDto;
 import com.devstudios.portfolio.portfolio_backend.application.dtos.response.ResponseDto;
@@ -36,9 +37,18 @@ public class ComentService {
         return new ResponseDto<>(comentDb, "Already save", 201);
     }
 
-    public ResponseDto<List<ComentEntity>> findAll( PaginationDto paginationDto ){
+    public ResponseDto<List<ComentDto>> findAll( PaginationDto paginationDto ){
         Pageable pagination = PageRequest.of(paginationDto.getPage(), paginationDto.getElements(), Sort.by("id").descending());
-        return new ResponseDto<>(comentRepository.findAll(pagination), "All coments", 200);
+        return new ResponseDto<>(comentRepository.findAll(pagination)
+            .stream().map( c -> {
+                ComentDto comentDto = new ComentDto();
+                comentDto.setContent(c.getContent());
+                comentDto.setDate(c.getDate());
+                comentDto.setId(c.getId());
+                comentDto.setStars(c.getStars());
+                comentDto.setUsername(c.getUsername());
+                return comentDto;
+            }).toList(), "All coments", 200);
     }
 
 }
